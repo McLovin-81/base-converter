@@ -4,7 +4,7 @@
 
 int main()
 {
-	Number n("0x123");
+	Number n("0x1234");
 
 	std::cout << n.base << std::endl;
 	std::cout  << n.number << std::endl;
