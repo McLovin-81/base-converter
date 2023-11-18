@@ -17,11 +17,9 @@ class Number
         // Get
 
         // Set
-        //void setBaseAndNumber();
 
         // Functions
-        bool checkInput();
-        bool checkBase();
+        bool baseOk();
 };
 
 #endif // NUMBER_H

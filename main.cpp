@@ -9,5 +9,7 @@ int main()
 	std::cout << n.base << std::endl;
 	std::cout  << n.number << std::endl;
 
+	std::cout << n.baseOk() <<  std::endl;
+
 	return 0;
 }
