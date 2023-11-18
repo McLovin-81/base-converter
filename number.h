@@ -6,7 +6,7 @@
 class Number
 {
     //private:
-    public:
+    private:
         std::string base;
         std::string number;
 
@@ -20,6 +20,8 @@ class Number
 
         // Functions
         bool baseOk();
+        std::string getBase();
+        std::string getNumber();
 };
 
 #endif // NUMBER_H

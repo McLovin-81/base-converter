@@ -1,5 +1,6 @@
 #include "number.h"
 
+
 /**
  * @brief Set the number.
  * 
@@ -10,6 +11,7 @@ Number::Number(std::string n)
     number = n.substr(2);
     base = n.substr(0, 2);
 }
+
 
 /**
  * @brief Check if the base is 0x or 0b or a number between 0 and 9.
@@ -26,4 +28,16 @@ bool Number::baseOk()
     {
         return false;
     }
+}
+
+
+std::string Number::getBase()
+{
+    return base;
+}
+
+
+std::string Number::getNumber()
+{
+    return number;
 }
