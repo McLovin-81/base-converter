@@ -19,15 +19,13 @@ class Number
         std::string getValue();
 
         // Set
-        //void setBase(std::string base);
-        //void setValue(std::string value);
 
         // Functions
         bool baseOk();
 
 
-        std::string binNum;
-        std::string hexNum;
+        std::string binaryRepresentation;
+        std::string hexRepresensation;
         std::string decNum;
 };
 

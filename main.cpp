@@ -6,7 +6,7 @@
 int main()
 {
 
-	Number n("0d20");
+	Number n("0d1023");
 	std::cout << n.getBase() << std::endl;
 	std::cout  << n.getValue() << std::endl;
 	std::cout << n.baseOk() <<  std::endl;
@@ -15,7 +15,8 @@ int main()
 
 	converter.convertFromDecimal();
 
-	std::cout << "binNum: " << n.binNum << std::endl;
+	std::cout << "Binary representation: " << n.binaryRepresentation << std::endl;
+	std::cout << "Hex representation: " << n.hexRepresensation << std::endl;
 
 
 	return 0;

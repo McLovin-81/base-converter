@@ -23,18 +23,56 @@
  */
 Converter::Converter(Number *numPtr) : numberPtr(numPtr) {}
 
-// Got infinite loop by 1 length number
+
+void Converter::convert()
+{
+    if (numberPtr->getBase() == "0d")
+    {
+        convertFromDecimal();
+        // Add the other calculations
+    }
+}
+
 void Converter::convertFromDecimal()
 {
     int numInt;
-    int numBinaryInt;
-    numInt = convertToInt(numberPtr->getValue());
+    int remainder;
 
+    numInt = convertToInt(numberPtr->getValue());
     while (numInt > 0)
     {
-        numBinaryInt = numInt % 2;
-        numberPtr->binNum.insert(0, std::to_string(numBinaryInt));
+        remainder = numInt % 2;
+        numberPtr->binaryRepresentation.insert(0, std::to_string(remainder));
         numInt = numInt / 2;
+    }
+
+    numInt = convertToInt(numberPtr->getValue());
+    while (numInt > 0)
+    {
+        remainder = numInt % 16;
+        switch (remainder)
+        {
+            case 15:
+                numberPtr->hexRepresensation.insert(0, "F");
+                break;
+            case 14:
+                numberPtr->hexRepresensation.insert(0, "E");
+                break;
+            case 13:
+                numberPtr->hexRepresensation.insert(0, "D");
+                break;
+            case 12:
+                numberPtr->hexRepresensation.insert(0, "C");
+            case 11:
+                numberPtr->hexRepresensation.insert(0, "B");
+                break;
+            case 10:
+                numberPtr->hexRepresensation.insert(0, "A");
+                break;
+            default:
+                numberPtr->hexRepresensation.insert(0, std::to_string(remainder));
+        }
+        numInt = numInt / 16;
     }
 }
 

@@ -16,6 +16,7 @@ class Converter
         Converter(Number* numPtr);
         void convertFromDecimal();
         int convertToInt(std::string num);
+        void convert();
 
 
 };

@@ -42,15 +42,3 @@ std::string Number::getValue()
     return value;
 }
 
-
-/*
-void Number::setBase(std::string base)
-{
-    this->base = base;
-}
-
-void Number::setValue(std::string value)
-{
-    this->value = value;
-}
-*/
