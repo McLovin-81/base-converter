@@ -11,6 +11,12 @@ int main()
 	std::cout  << n.getValue() << std::endl;
 	std::cout << n.baseOk() <<  std::endl;
 
+    Converter converter(&n);
+
+	converter.convertFromDecimal();
+
+	std::cout << n.binNum << std::endl;
+
 
 	return 0;
 }

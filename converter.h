@@ -8,16 +8,17 @@
 class Converter
 {
     private:
-        Number number;
+        Number* numberPtr;
+        int num;
 
 
     public:
+        Converter(Number* numPtr);
         void convertFromDecimal();
-        int convertToInt(std::string num);
+        int convertToInt(std::string* num);
 
 
 };
-
 
 
 #endif // CONVERTER_H

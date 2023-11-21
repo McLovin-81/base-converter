@@ -19,8 +19,8 @@ class Number
         std::string getValue();
 
         // Set
-        void setBase(std::string base);
-        void setValue(std::string value);
+        //void setBase(std::string base);
+        //void setValue(std::string value);
 
         // Functions
         bool baseOk();
