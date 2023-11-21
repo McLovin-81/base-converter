@@ -6,7 +6,7 @@
 int main()
 {
 
-	Number n("0d5");
+	Number n("0d20");
 	std::cout << n.getBase() << std::endl;
 	std::cout  << n.getValue() << std::endl;
 	std::cout << n.baseOk() <<  std::endl;
@@ -15,7 +15,7 @@ int main()
 
 	converter.convertFromDecimal();
 
-	//std::cout << n.binNum << std::endl;
+	std::cout << "binNum: " << n.binNum << std::endl;
 
 
 	return 0;

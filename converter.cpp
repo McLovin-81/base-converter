@@ -23,21 +23,19 @@
  */
 Converter::Converter(Number *numPtr) : numberPtr(numPtr) {}
 
-
+// Got infinite loop by 1 length number
 void Converter::convertFromDecimal()
 {
     int numInt;
     int numBinaryInt;
-
     numInt = convertToInt(numberPtr->getValue());
 
     while (numInt > 0)
     {
         numBinaryInt = numInt % 2;
         numberPtr->binNum.insert(0, std::to_string(numBinaryInt));
-        numInt = numInt % 2;
+        numInt = numInt / 2;
     }
-
 }
 
 int Converter::convertToInt(std::string num)
