@@ -4,11 +4,21 @@
 void Converter::convertFromDecimal()
 {
     int numInt;
-    int remainder;
-    int numBinary;
+    int numBinaryInt;
 
-    numInt = std::stoi(num.getNumber());
+    numInt = convertToInt(number.getValue());
 
-    remainder = numInt % 2;
-    numInt = numInt / 2;
+    while (numInt > 0)
+    {
+        numBinaryInt = numInt % 2;
+        number.binNum.insert(0, std::to_string(numBinaryInt));
+        numInt = numInt % 2;
+    }
+
+
+}
+
+int Converter::convertToInt(std::string num)
+{
+    return std::stoi(num);
 }

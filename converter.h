@@ -8,11 +8,12 @@
 class Converter
 {
     private:
-    Number num;
+        Number number;
 
 
     public:
         void convertFromDecimal();
+        int convertToInt(std::string num);
 
 
 };

@@ -8,7 +8,7 @@
 */
 Number::Number(std::string n)
 {
-    number = n.substr(2);
+    value = n.substr(2);
     base = n.substr(0, 2);
 }
 
@@ -37,7 +37,17 @@ std::string Number::getBase()
 }
 
 
-std::string Number::getNumber()
+std::string Number::getValue()
 {
-    return number;
+    return value;
+}
+
+void Number::setBase(std::string base)
+{
+    this->base = base;
+}
+
+void Number::setValue(std::string value)
+{
+    this->value = value;
 }
