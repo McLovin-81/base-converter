@@ -6,7 +6,7 @@
 int main()
 {
 
-	Number n("0b111");
+	Number n("0d255");
     Converter converter(&n);
 
 	std::cout  << n.getValue() << std::endl;
