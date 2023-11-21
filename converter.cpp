@@ -29,7 +29,14 @@ void Converter::convert()
     if (numberPtr->getBase() == "0d")
     {
         convertFromDecimal();
-        // Add the other calculations
+        std::cout << "Binary representation: " << numberPtr->binaryRepresentation << std::endl;
+        std::cout << "Hex representation: " << numberPtr->hexRepresensation << std::endl;
+    }
+    else if (numberPtr->getBase() == "0b")
+    {
+        convertFromBinary();
+        std::cout << "Decimal representation: " << numberPtr->decimalRepresentation << std::endl;
+        std::cout << "Hex representation: " << numberPtr->hexRepresensation << std::endl;
     }
 }
 
@@ -38,6 +45,7 @@ void Converter::convertFromDecimal()
     int numInt;
     int remainder;
 
+    // To binary
     numInt = convertToInt(numberPtr->getValue());
     while (numInt > 0)
     {
@@ -46,6 +54,7 @@ void Converter::convertFromDecimal()
         numInt = numInt / 2;
     }
 
+    // To hexadecimal
     numInt = convertToInt(numberPtr->getValue());
     while (numInt > 0)
     {
@@ -63,6 +72,7 @@ void Converter::convertFromDecimal()
                 break;
             case 12:
                 numberPtr->hexRepresensation.insert(0, "C");
+                break;
             case 11:
                 numberPtr->hexRepresensation.insert(0, "B");
                 break;
@@ -75,6 +85,79 @@ void Converter::convertFromDecimal()
         numInt = numInt / 16;
     }
 }
+
+
+void Converter::convertFromBinary()
+{
+    std::string number = numberPtr->getValue();
+    int numLength = numberPtr->getValue().size();;
+    int countPower = 1;
+    int numTemp = 0;
+
+    // To decimal
+    for (int i = numLength -1; i >= 0; i--)
+    {
+        if (number[i] == '1')
+        {
+            numTemp += countPower;
+        }
+        countPower *= 2;
+    }
+    numberPtr->decimalRepresentation = std::to_string(numTemp);
+
+
+    // To hexadecimal
+    int nibbleCounter = 1;
+    countPower = 1;
+    numTemp = 0;
+
+    for (int i = numLength -1; i >= 0; i--)
+    {
+        if (number[i] == '1')
+        {
+            numTemp += countPower;
+        }
+        countPower *= 2;
+
+        if (nibbleCounter == 4 || i == 0)
+        {
+            switch (numTemp)
+            {
+                case 15:
+                    numberPtr->hexRepresensation.insert(0, "F");
+                    break;
+                case 14:
+                    numberPtr->hexRepresensation.insert(0, "E");
+                    break;
+                case 13:
+                    numberPtr->hexRepresensation.insert(0, "D");
+                    break;
+                case 12:
+                    numberPtr->hexRepresensation.insert(0, "C");
+                    break;
+                case 11:
+                    numberPtr->hexRepresensation.insert(0, "B");
+                    break;
+                case 10:
+                    numberPtr->hexRepresensation.insert(0, "A");
+                    break;
+                default:
+                    numberPtr->hexRepresensation.insert(0, std::to_string(numTemp));
+            }
+
+            nibbleCounter = 1;
+            countPower = 1;
+            numTemp = 0;
+        }
+        else
+        {
+            nibbleCounter++;
+        }
+
+        
+    }
+}
+
 
 int Converter::convertToInt(std::string num)
 {

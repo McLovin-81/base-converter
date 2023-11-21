@@ -9,12 +9,11 @@ class Converter
 {
     private:
         Number* numberPtr;
-        int num;
-
 
     public:
         Converter(Number* numPtr);
         void convertFromDecimal();
+        void convertFromBinary();
         int convertToInt(std::string num);
         void convert();
 

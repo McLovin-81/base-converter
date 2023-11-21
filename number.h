@@ -26,7 +26,7 @@ class Number
 
         std::string binaryRepresentation;
         std::string hexRepresensation;
-        std::string decNum;
+        std::string decimalRepresentation;
 };
 
 #endif // NUMBER_H
