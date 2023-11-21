@@ -15,7 +15,7 @@ class Converter
     public:
         Converter(Number* numPtr);
         void convertFromDecimal();
-        int convertToInt(std::string* num);
+        int convertToInt(std::string num);
 
 
 };
