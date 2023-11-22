@@ -5,8 +5,6 @@
 
 int main()
 {
-	//Number n("0x14");
-    //Converter converter(&n);
 	std::string userInput;
 	while (true)
 	{
@@ -20,6 +18,7 @@ int main()
 		std::cout << std::endl;
 		std::cout << std::endl;
 		std::cout << std::endl;
+
 		if (userInput == "exit")
 		{
 			return 0;
@@ -27,7 +26,6 @@ int main()
 
 		Number num(userInput);
 		Converter converter(&num);
-
 	}
 
 	return 0;
