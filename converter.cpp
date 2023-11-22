@@ -31,18 +31,21 @@ void Converter::convert()
 {
     if (numberPtr->getBase() == "0d")
     {
+        std::cout << "Decimal: " << numberPtr->getValue() << std::endl;
         convertFromDecimal();
         std::cout << "Binary representation: " << numberPtr->binaryRepresentation << std::endl;
         std::cout << "Hex representation: " << numberPtr->hexRepresensation << std::endl;
     }
     else if (numberPtr->getBase() == "0b")
     {
+        std::cout << "Binary: " << numberPtr->getValue() << std::endl;
         convertFromBinary();
         std::cout << "Decimal representation: " << numberPtr->decimalRepresentation << std::endl;
         std::cout << "Hex representation: " << numberPtr->hexRepresensation << std::endl;
     }
     else if(numberPtr->getBase() == "0x")
     {
+        std::cout << "Hex: " << numberPtr->getValue() << std::endl;
         convertFromHex();
         std::cout << "Decimal representation: " << numberPtr->decimalRepresentation << std::endl;
         std::cout << "Binary representation: " << numberPtr->binaryRepresentation << std::endl;

@@ -9,6 +9,7 @@ class Number
     private:
         std::string base;
         std::string value;
+        bool baseOk();
 
     public:
         // Constructor
@@ -21,7 +22,7 @@ class Number
         // Set
 
         // Functions
-        bool baseOk();
+
 
 
         std::string binaryRepresentation;

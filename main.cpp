@@ -5,11 +5,30 @@
 
 int main()
 {
-	// Hex -> Bin
-	Number n("0x14");
-    Converter converter(&n);
+	//Number n("0x14");
+    //Converter converter(&n);
+	std::string userInput;
+	while (true)
+	{
+		std::cout << std::endl;
+		std::cout << "Enter: ";
+		std::cin >> userInput;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
+		if (userInput == "exit")
+		{
+			return 0;
+		}
 
-	std::cout  << "Hex: " << n.getValue() << std::endl;
+		Number num(userInput);
+		Converter converter(&num);
+
+	}
 
 	return 0;
 }
