@@ -9,16 +9,14 @@ class Converter
 {
     private:
         Number* numberPtr;
-
-    public:
-        Converter(Number* numPtr);
+        void convert();
         void convertFromDecimal();
         void convertFromBinary();
         void convertFromHex();
         int convertToInt(std::string num);
-        void convert();
 
-
+    public:
+        Converter(Number* numPtr);
 };
 
 

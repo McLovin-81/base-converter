@@ -5,14 +5,11 @@
 
 int main()
 {
-
-	Number n("0x12c");
+	// Hex -> Bin
+	Number n("0x14");
     Converter converter(&n);
 
-	std::cout  << n.getValue() << std::endl;
-	converter.convert();
-
-	
+	std::cout  << "Hex: " << n.getValue() << std::endl;
 
 	return 0;
 }

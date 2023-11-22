@@ -21,7 +21,10 @@
  * Converter converter(&myNumber); // Create a Converter object with a pointer to 'myNumber'
  * \endcode
  */
-Converter::Converter(Number *numPtr) : numberPtr(numPtr) {}
+Converter::Converter(Number *numPtr) : numberPtr(numPtr)
+{
+    convert();
+}
 
 
 void Converter::convert()
@@ -42,6 +45,7 @@ void Converter::convert()
     {
         convertFromHex();
         std::cout << "Decimal representation: " << numberPtr->decimalRepresentation << std::endl;
+        std::cout << "Binary representation: " << numberPtr->binaryRepresentation << std::endl;
     }
 }
 
@@ -50,9 +54,9 @@ void Converter::convertFromDecimal()
 {
     int numInt;
     int remainder;
+    numInt = convertToInt(numberPtr->getValue());
 
     // To binary //
-    numInt = convertToInt(numberPtr->getValue());
     while (numInt > 0)
     {
         remainder = numInt % 2;
@@ -212,12 +216,73 @@ void Converter::convertFromHex()
                     break;
                 default:
                     std::cout << "Error" << std::endl;
-                    break;
+                    return;
             }
         }
         countPower *= 16;
     }
     numberPtr->decimalRepresentation = std::to_string(numTemp);
+
+
+    // To binary //
+    int remainder;
+    std::string binaryNibble;
+    int nibbleCounter = 1;
+
+    for (int i = numLength -1; i >= 0; i--)
+    {
+        if (number[i] != '0')
+        {
+            switch (number[i])
+            {
+                case 'f':
+                    charToInt = 15;
+                    break;
+                case 'e':
+                    charToInt = 14;
+                    break;
+                case 'd':
+                    charToInt = 13;
+                    break;
+                case 'c':
+                    charToInt = 12;
+                    break;
+                case 'b':
+                    charToInt = 11;
+                    break;
+                case 'a':
+                    charToInt = 10;
+                    break;
+                case '9':
+                case '8':
+                case '7':
+                case '6':
+                case '5':
+                case '4':
+                case '3':
+                case '2':
+                case '1':
+                    charToInt = number[i] - '0'; // Convert char to int.
+                    break;
+                default:
+                    std::cout << "Error" << std::endl;
+                    return;
+            }
+
+            while (charToInt > 0)
+            {
+                remainder = charToInt % 2;
+                binaryNibble.insert(0, std::to_string(remainder));
+                charToInt /= 2;
+            }
+            while (binaryNibble.size() < 4)
+            {
+                binaryNibble.insert(0, "0");
+            }
+            numberPtr->binaryRepresentation.insert(0, binaryNibble);
+            binaryNibble = "";
+        }
+    }
 }
 
 
