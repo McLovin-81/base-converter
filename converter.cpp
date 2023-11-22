@@ -38,14 +38,20 @@ void Converter::convert()
         std::cout << "Decimal representation: " << numberPtr->decimalRepresentation << std::endl;
         std::cout << "Hex representation: " << numberPtr->hexRepresensation << std::endl;
     }
+    else if(numberPtr->getBase() == "0x")
+    {
+        convertFromHex();
+        std::cout << "Decimal representation: " << numberPtr->decimalRepresentation << std::endl;
+    }
 }
+
 
 void Converter::convertFromDecimal()
 {
     int numInt;
     int remainder;
 
-    // To binary
+    // To binary //
     numInt = convertToInt(numberPtr->getValue());
     while (numInt > 0)
     {
@@ -54,7 +60,7 @@ void Converter::convertFromDecimal()
         numInt = numInt / 2;
     }
 
-    // To hexadecimal
+    // To hexadecimal //
     numInt = convertToInt(numberPtr->getValue());
     while (numInt > 0)
     {
@@ -81,6 +87,7 @@ void Converter::convertFromDecimal()
                 break;
             default:
                 numberPtr->hexRepresensation.insert(0, std::to_string(remainder));
+                break;
         }
         numInt = numInt / 16;
     }
@@ -94,7 +101,7 @@ void Converter::convertFromBinary()
     int countPower = 1;
     int numTemp = 0;
 
-    // To decimal
+    // To decimal //
     for (int i = numLength -1; i >= 0; i--)
     {
         if (number[i] == '1')
@@ -106,7 +113,7 @@ void Converter::convertFromBinary()
     numberPtr->decimalRepresentation = std::to_string(numTemp);
 
 
-    // To hexadecimal
+    // To hexadecimal //
     int nibbleCounter = 1;
     countPower = 1;
     numTemp = 0;
@@ -143,7 +150,8 @@ void Converter::convertFromBinary()
                     break;
                 default:
                     numberPtr->hexRepresensation.insert(0, std::to_string(numTemp));
-            }
+                    break;
+            }       
 
             nibbleCounter = 1;
             countPower = 1;
@@ -153,9 +161,63 @@ void Converter::convertFromBinary()
         {
             nibbleCounter++;
         }
-
-        
     }
+}
+
+
+void Converter::convertFromHex()
+{
+    std::string number = numberPtr->getValue();
+    int numLength = numberPtr->getValue().size();;
+    int countPower = 1;
+    long long numTemp = 0;
+    int charToInt;
+
+    // To decimal //
+    for (int i = numLength -1; i >= 0; i--)
+    {
+        if (number[i] != '0')
+        {
+            switch (number[i])
+            {
+                case 'f':
+                    numTemp += 15 * countPower;
+                    break;
+                case 'e':
+                    numTemp += 14 * countPower;
+                    break;
+                case 'd':
+                    numTemp += 13 * countPower;
+                    break;
+                case 'c':
+                    numTemp += 12 * countPower;
+                    break;
+                case 'b':
+                    numTemp += 11 *  countPower;
+                    break;
+                case 'a':
+                    numTemp += 10 * countPower;
+                    break;
+                case '9':
+                case '8':
+                case '7':
+                case '6':
+                case '5':
+                case '4':
+                case '3':
+                case '2':
+                case '1':
+                    charToInt = number[i] - '0'; // Convert char to int.
+                    numTemp += charToInt * countPower;
+                    break;
+                default:
+                    std::cout << "Error" << std::endl;
+                    break;
+            }
+        }
+        countPower *= 16;
+    }
+    numberPtr->decimalRepresentation = std::to_string(numTemp);
 }
 
 

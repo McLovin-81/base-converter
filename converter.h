@@ -14,6 +14,7 @@ class Converter
         Converter(Number* numPtr);
         void convertFromDecimal();
         void convertFromBinary();
+        void convertFromHex();
         int convertToInt(std::string num);
         void convert();
 
