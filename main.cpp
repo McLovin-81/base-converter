@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "number.cpp"
-#include "converter.cpp"
+#include "src/number.cpp"
+#include "src/converter.cpp"
 
 int main()
 {
