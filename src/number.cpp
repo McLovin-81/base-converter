@@ -8,8 +8,8 @@
 */
 Number::Number(std::string n)
 {
-    value = n.substr(2);
     base = n.substr(0, 2);
+    value = n.substr(2);
 }
 
 
