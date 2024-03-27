@@ -33,12 +33,12 @@ bool Number::baseOk()
 
 std::string Number::getBase()
 {
-    return base;
+    return this->base;
 }
 
 
 std::string Number::getValue()
 {
-    return value;
+    return this->value;
 }
 
