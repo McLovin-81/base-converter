@@ -9,18 +9,18 @@ class Number
     private:
         std::string base;
         std::string value;
-        bool baseOk();
+        
 
     public:
         Number(std::string n);
+        bool baseOk();
 
         // Get
         std::string getBase();
         std::string getValue();
 
-        // Functions
         std::string binaryRepresentation;
-        std::string hexRepresensation;
+        std::string hexRepresentation;
         std::string decimalRepresentation;
 };
 

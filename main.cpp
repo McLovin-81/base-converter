@@ -6,26 +6,31 @@
 int main()
 {
 	std::string userInput;
+	Converter converter;
+
 	while (true)
 	{
 		std::cout << std::endl;
 		std::cout << "Enter: ";
 		std::cin >> userInput;
 		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
 
 		if (userInput == "exit")
 		{
-			return 0;
+			std::cout << "Exiting the program." << std::endl;
+			break;
 		}
 
 		Number num(userInput);
-		Converter converter(&num);
+
+		if (num.baseOk())
+		{
+			converter.convert(&num);
+		}
+		else
+		{
+			std::cout << "Invalid number base." << std::endl;
+		}
 	}
 
 	return 0;

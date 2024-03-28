@@ -1,60 +1,33 @@
 #include "../header/converter.h"
 
 
-// Constructor
-/**
- * @brief Constructor for the Converter class.
- * 
- * Initializes a Converter object with a pointer to a Number object.
- * 
- * @param numPtr A pointer to a Number object that the Converter will utilize.
- * 
- * @details This constructor initializes the Converter object by setting its internal pointer
- * to a Number object provided as a parameter. The Converter object can then utilize the 
- * Number object via this pointer in various operations or functions.
- * 
- * @note The ownership and lifetime of the Number object pointed to by 'numPtr' 
- * must be managed externally to prevent potential memory leaks or access to invalid objects.
- * 
- * Example Usage:
- * \code{.cpp}
- * Number myNumber("123"); // Create a Number object
- * Converter converter(&myNumber); // Create a Converter object with a pointer to 'myNumber'
- * \endcode
- */
-Converter::Converter(Number *numPtr) : numberPtr(numPtr)
-{
-    convert();
-}
-
-
-void Converter::convert()
+void Converter::convert(Number* numberPtr)
 {
     if (numberPtr->getBase() == "0d")
     {
         std::cout << "Decimal: " << numberPtr->getValue() << std::endl;
-        convertFromDecimal();
+        convertFromDecimal(numberPtr);
         std::cout << "Binary representation: " << numberPtr->binaryRepresentation << std::endl;
-        std::cout << "Hex representation: " << numberPtr->hexRepresensation << std::endl;
+        std::cout << "Hex representation: " << numberPtr->hexRepresentation << std::endl;
     }
     else if (numberPtr->getBase() == "0b")
     {
         std::cout << "Binary: " << numberPtr->getValue() << std::endl;
-        convertFromBinary();
+        convertFromBinary(numberPtr);
         std::cout << "Decimal representation: " << numberPtr->decimalRepresentation << std::endl;
-        std::cout << "Hex representation: " << numberPtr->hexRepresensation << std::endl;
+        std::cout << "Hex representation: " << numberPtr->hexRepresentation << std::endl;
     }
     else if(numberPtr->getBase() == "0x")
     {
         std::cout << "Hex: " << numberPtr->getValue() << std::endl;
-        convertFromHex();
+        convertFromHex(numberPtr);
         std::cout << "Decimal representation: " << numberPtr->decimalRepresentation << std::endl;
         std::cout << "Binary representation: " << numberPtr->binaryRepresentation << std::endl;
     }
 }
 
 
-void Converter::convertFromDecimal()
+void Converter::convertFromDecimal(Number* numberPtr)
 {
     int numInt;
     int remainder;
@@ -65,7 +38,7 @@ void Converter::convertFromDecimal()
     {
         remainder = numInt % 2;
         numberPtr->binaryRepresentation.insert(0, std::to_string(remainder));
-        numInt = numInt / 2;
+        numInt /= 2;
     }
 
     // To hexadecimal //
@@ -76,25 +49,25 @@ void Converter::convertFromDecimal()
         switch (remainder)
         {
             case 15:
-                numberPtr->hexRepresensation.insert(0, "F");
+                numberPtr->hexRepresentation.insert(0, "F");
                 break;
             case 14:
-                numberPtr->hexRepresensation.insert(0, "E");
+                numberPtr->hexRepresentation.insert(0, "E");
                 break;
             case 13:
-                numberPtr->hexRepresensation.insert(0, "D");
+                numberPtr->hexRepresentation.insert(0, "D");
                 break;
             case 12:
-                numberPtr->hexRepresensation.insert(0, "C");
+                numberPtr->hexRepresentation.insert(0, "C");
                 break;
             case 11:
-                numberPtr->hexRepresensation.insert(0, "B");
+                numberPtr->hexRepresentation.insert(0, "B");
                 break;
             case 10:
-                numberPtr->hexRepresensation.insert(0, "A");
+                numberPtr->hexRepresentation.insert(0, "A");
                 break;
             default:
-                numberPtr->hexRepresensation.insert(0, std::to_string(remainder));
+                numberPtr->hexRepresentation.insert(0, std::to_string(remainder));
                 break;
         }
         numInt = numInt / 16;
@@ -102,7 +75,7 @@ void Converter::convertFromDecimal()
 }
 
 
-void Converter::convertFromBinary()
+void Converter::convertFromBinary(Number* numberPtr)
 {
     std::string number = numberPtr->getValue();
     int numLength = numberPtr->getValue().size();;
@@ -139,25 +112,25 @@ void Converter::convertFromBinary()
             switch (numTemp)
             {
                 case 15:
-                    numberPtr->hexRepresensation.insert(0, "F");
+                    numberPtr->hexRepresentation.insert(0, "F");
                     break;
                 case 14:
-                    numberPtr->hexRepresensation.insert(0, "E");
+                    numberPtr->hexRepresentation.insert(0, "E");
                     break;
                 case 13:
-                    numberPtr->hexRepresensation.insert(0, "D");
+                    numberPtr->hexRepresentation.insert(0, "D");
                     break;
                 case 12:
-                    numberPtr->hexRepresensation.insert(0, "C");
+                    numberPtr->hexRepresentation.insert(0, "C");
                     break;
                 case 11:
-                    numberPtr->hexRepresensation.insert(0, "B");
+                    numberPtr->hexRepresentation.insert(0, "B");
                     break;
                 case 10:
-                    numberPtr->hexRepresensation.insert(0, "A");
+                    numberPtr->hexRepresentation.insert(0, "A");
                     break;
                 default:
-                    numberPtr->hexRepresensation.insert(0, std::to_string(numTemp));
+                    numberPtr->hexRepresentation.insert(0, std::to_string(numTemp));
                     break;
             }       
 
@@ -173,10 +146,10 @@ void Converter::convertFromBinary()
 }
 
 
-void Converter::convertFromHex()
+void Converter::convertFromHex(Number* numberPtr)
 {
     std::string number = numberPtr->getValue();
-    int numLength = numberPtr->getValue().size();;
+    int numLength = number.size();
     int countPower = 1;
     long long numTemp = 0;
     int charToInt;
@@ -184,8 +157,7 @@ void Converter::convertFromHex()
     // To decimal //
     for (int i = numLength -1; i >= 0; i--)
     {
-        if (number[i] != '0')
-        {
+
             switch (number[i])
             {
                 case 'f':
@@ -215,77 +187,77 @@ void Converter::convertFromHex()
                 case '3':
                 case '2':
                 case '1':
-                    charToInt = number[i] - '0'; // Convert char to int.
+                case '0':
+                    charToInt = number[i] - '0'; // Convert a character to an integer by subtracting the ASCII value of '0' from the character.
                     numTemp += charToInt * countPower;
                     break;
                 default:
-                    std::cout << "Error" << std::endl;
+                    std::cout << "Error: Invalid hex digit" << std::endl;
                     return;
             }
-        }
+
         countPower *= 16;
     }
     numberPtr->decimalRepresentation = std::to_string(numTemp);
 
 
     // To binary //
-    int remainder;
     std::string binaryNibble;
-    int nibbleCounter = 1;
 
-    for (int i = numLength -1; i >= 0; i--)
+    for (int i = numLength - 1; i >= 0; i--)
     {
-        if (number[i] != '0')
+        switch (number[i])
         {
-            switch (number[i])
-            {
-                case 'f':
-                    charToInt = 15;
-                    break;
-                case 'e':
-                    charToInt = 14;
-                    break;
-                case 'd':
-                    charToInt = 13;
-                    break;
-                case 'c':
-                    charToInt = 12;
-                    break;
-                case 'b':
-                    charToInt = 11;
-                    break;
-                case 'a':
-                    charToInt = 10;
-                    break;
-                case '9':
-                case '8':
-                case '7':
-                case '6':
-                case '5':
-                case '4':
-                case '3':
-                case '2':
-                case '1':
-                    charToInt = number[i] - '0'; // Convert char to int.
-                    break;
-                default:
-                    std::cout << "Error" << std::endl;
-                    return;
-            }
-
-            while (charToInt > 0)
-            {
-                remainder = charToInt % 2;
-                binaryNibble.insert(0, std::to_string(remainder));
-                charToInt /= 2;
-            }
-            while (binaryNibble.size() < 4)
-            {
-                binaryNibble.insert(0, "0");
-            }
-            numberPtr->binaryRepresentation.insert(0, binaryNibble);
-            binaryNibble = "";
+            case 'f':
+                binaryNibble = "1111 ";
+                break;
+            case 'e':
+                binaryNibble = "1110 ";
+                break;
+            case 'd':
+                binaryNibble = "1101 ";
+                break;
+            case 'c':
+                binaryNibble = "1100 ";
+                break;
+            case 'b':
+                binaryNibble = "1011 ";
+                break;
+            case 'a':
+                binaryNibble = "1010 ";
+                break;
+            case '9':
+                binaryNibble = "1001 ";
+                break;
+            case '8':
+                binaryNibble = "1000 ";
+                break;
+            case '7':
+                binaryNibble = "0111 ";
+                break;
+            case '6':
+                binaryNibble = "0110 ";
+                break;
+            case '5':
+                binaryNibble = "0101 ";
+                break;
+            case '4':
+                binaryNibble = "0100 ";
+                break;
+            case '3':
+                binaryNibble = "0011 ";
+                break;
+            case '2':
+                binaryNibble = "0010 ";
+                break;
+            case '1':
+                binaryNibble = "0001 ";
+                break;
+            case '0':
+                binaryNibble = "0000 ";
+                break;
         }
+        numberPtr->binaryRepresentation.insert(0, binaryNibble);
     }
 }
 
